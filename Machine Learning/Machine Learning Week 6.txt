@@ -1,0 +1,53 @@
+Machine Learning Week 6
+Debugging a learning algorithm...what to do if it is making big errors?
+- get more training examples
+- try smaller set of features, choose the subset to prevent overfitting
+- get new features
+- add polynomial features
+- increase/decrease lambda
+
+which option to pick? Don't choose randomly
+apply machine learning diagnostic, a test to gain insight to what isn't working in an algorithm and thus how to improve performance 
+
+Evaluating a hypothesis:
+is it overfitting? 
+can't plot h(x) if there is a lot of features
+70/30 (training : test split)
+instead compute Jtest which is the error for the testing set 
+
+Model selection & Train/Validation/Test Sets
+once parameters are fit to test set, the error of these parameters on the test set is likely to be lower than the actual generalisation error. 
+
+model selection: 
+in addition to theta parameters, what degree of polynomial do we want to fit to data set?
+d = degree of polynomial 
+compute test error for different model/parameter sets
+use model with lowest test set error
+however..this test set error isn't likely to reflect how well the model will generalise, because the extra parameter was chosen to fit the test set. 
+so split dataset into three pieces: training, test and validation 
+choose model on test set, validate on validation set. 
+split 60,20,20
+
+
+test hypothses on the validation set to pick the  hypo w/ lowest error
+then estimate a generalisation error on the test set. 
+
+
+Bias vs Variance: 
+Bias = Underfitting (e.g. you are assuming there is a linear relationship)
+Variance = Overfitting
+plot: error for training and validation against degree of polynomial
+training error will decrease with degree of polynomial 
+validation error will be a bowl-like curve (convex curve), peak on either end corresponds to high bias/high variance
+thus
+Bias(underfit): Jtrain and Jval both high
+Variance(Overfit): Jtrain low but Jval high 
+
+Regularization & Bias/Variance:
+Large lambda = high bias 
+small lambda = high variance 
+how to automatically choose value for lambda? 
+step up lambda from 0 in multiples of 2 till 10.24
+12 models w/ 12 values of lambda 
+choose one with lowest J on cv set.
+to calculate actual error...one you have set the theta parameters on the training set get rid of the lambda term for J(train) and J(val), it has served its purpose. 

@@ -1,0 +1,16 @@
+Machine Learning Week 1 
+Gradient Descent -  general algorithm, used in context of minimising J(cost function) in a linear regression. 
+Symbols 
+m = number of trials
+J = cost function (for parameters theta 0, theta 1)
+:= = assignment 
+= = truth assertion
+a = learning rate, how big a step we take down hill with gradient descent 
+repeat until convergence for j = 0, j = 1 i.e. keep updating theta 0 and theta 1. simultaneously update theta 0 and theta 1 .GRADIENT DESCENT ALWAYS MEANS SIMULTANEOUS UPDATE.
+DERIVATIVE = for a given point on function what is slope of line tangential to that point. If slope is / it is positive therefor the term after alpha is positive. Essentially the derivation tells you want direction to travel in order to minimise J theta 1.
+Gradient descent works ina  variety of contexts, in some it may lead to a local optimum. 
+COST Function of linear regression is always bowl curve ( = convex function) so gradient descent finds global optimum.
+Usually intialize parameters at 0,0.
+'Batch' gradient descent - each step of gradient descent uses all training examples. 
+Using linear algebra there is a solution to find minimum of cost function J without using an iterative approach (like gradient descent) = normal equations method. Gradient descent scales to bigger datasets. 
+Smooth function - has continuos derivatives  

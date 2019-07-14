@@ -1,0 +1,50 @@
+Machine Learning Week 6 
+
+Error metrics for skewed classes
+Cancer diagnosis, 1% error on test set, but only 0.5% of patients have cancer.
+This is worse than an algorithm that always predicts no cancer. 
+Skewed Classes: Class 1 >> Class 2 
+An increase in accuracy doesn't necessarily mean the classification is improving. 
+
+Use a specific evaluation metric:
+
+Precision/Recall
+Actual 1 Predic 1 = True Positive
+Actual 0 Predic 0 = True Negative 
+Actual 1 Predic 0 = False Positive
+Actual 0 Predic 1 = False Negative 
+
+Precision: Of all the patients that we predicted have cancer, what fraction have cancer?
+Which is #True Positives/ #Predicted Positives = True Positives/(True Positives + False Positives)
+
+Recall: Of all the patients that actually have cancer, what fraction did we correctly detect as having cancer? 
+#True Positives/#Actual Positives = #True Positives/(False Negatives + True Positives)
+
+note 
+y =1 in presence of rare class
+
+if a classifier gets high precision and high recall, confidence algorithm is working well. 
+
+Trading off precision and recall
+
+Predict y = 1 (cancer) only if very confident. How?
+Logistic Regression
+Predict 1 if h(x) > 0.7 (instead of > 0.5). This will result in a classifier with higher precision but lower recall. 
+
+Predict y = 1 (cancer) when in any doubt. 
+Predict y = 1 if h(x) > 0.3. Higher recall classifier but lower precision. 
+
+Is there a way to choose the h(x) threshold automatically?
+
+How do we compare precision recall numbers?
+No longer single number eval vector. 
+Is P 0.5 R 0.4 better than P 0.6 R 0.2?
+Average isn't a good solution, a classifier that predicts y = 1 all the time will have v high recall and vice versa. 
+Instead F1 Score: 2*(P*R/P+R) (gives the lower value between P and R a higher weight. By giving a product if P or R == 0 the numerator will be low). 
+We can use F score to give a single real number evaluation metric. Automatically choose threshold by evaluating F score on validation data set. 
+
+
+
+
+
+

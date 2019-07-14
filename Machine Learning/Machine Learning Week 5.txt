@@ -1,0 +1,111 @@
+Machine Learning Week 5 Training Neural Nets
+Try linear classification if it doesn't work, use neural network 
+L = number of layers in network
+s(subscrp L) = no. of units (not counting bias) in layer l 
+e.g.
+s(1) = 3
+
+s(L) = s(4) = final layer = K =  1
+1 unit in the output layer = binary classigication
+
+K distinct classes = multi-class
+h(x) = R^K (K dimensional vector)
+K >= 3, else use binary classification 
+
+Cost Function: 
+Generalisation of logistic regression Cost F 
+instead of one logistic regression output, we may have K 
+
+` denotes subscript
+J(theta) = -1/m*(SUMi=1:m[SUMK=1:K[y`k(i)log(h(x(i))`k + (1-y`k(i))log(1-(h(x(i))`k]] 
++ lambda/2m * SUMl=1-(L-1)[SUMi=sl[SUMj=1:sl+1[theta`j`i(l))^2]]]
+
+lots of terms
+first part
+summing the h(x) - y from all output units, remember h(x) & y = R^K (vectors)
+second part
+regularisation: summing all the theta values for each layer, sum from i = 1
+essentially sum all theta`(i)`(j)^(L), accounts for multiple theta matrices
+number of colummns in our current theta matrix is equal to number of nodes in current layer (incl output unit), number of rows in theta matrix equal to number of nodes in next layer (excl output layer). 
+
+Note:
+The double sum simply adds logistic regression costs calculated for each cell in output layer
+triple sum adds up costs for all individual thetas in entrie matrices i.e. theta matrix for each layer except the last. i in the triple sum different from i in double sum. 
+
+Minimising Cost Function: 
+minimise J(theta)
+need Cost Function and Gradient of d/d(theta(i)(j)(l)*J(theta) = partial derivative of every theta value w.r.t. cost funciton 
+
+gradient computation
+only one training example (x,y)
+a(1) = x 
+z(2) = theta(1)*a(1)
+a(2) = g(z(2))(add a0(2))
+....
+a(4) = h(x) = g(z(4))
+
+backpropagation, calculate delta(j)(l) = error of node j in layer l 
+L = 4 
+delta(j)(4) = a (j)(4) - y(j)
+= h(x)j - yj
+the output of the node compared to the y output for that node
+vectorise this:
+delta(4) - a(4) - y
+where delta, a and y are all vectors with dimension equal to number of output units in network
+
+for l = 3 
+delta(3) = (theta(3))Tdelta(4).*g'(z(3))
+l = 2 
+delta(2) =(theta(2))Tdelta(3).*g'(z(2)) %see intuition
+no delta (1) term
+
+g'(z(3)) - formally is the derivative of the activation function g evaluated at the input given by z: g'(z(3))  = a(3).*(1-(a(3)), can be proved via calculus. n' is notation for derivative of n
+
+backpropogation: we compute the delta term for the output layer and carry it back through the hidden layers, essentially forming a picture of how the error arose. 
+
+a complicated derivation of this algorithm, proves 
+d/dtheta(i)(j)(l)J(theta) = a(j)(l)*delta(i)(l+1) (ignoring lambda) 
+
+how to use this for several training examples
+
+set DELTA(i)(j)(l) = 0 for all l,i,j, used to compute d/delta(thetaijl)J(theta)
+capital DELTA terms accumulate all the partial derivative terms computed through backpropogation. matrix containing the accumulated error for each theta value. 
+
+
+for i = 1:m (each training example) (x(i),y(i))
+set a(1) = x(i),, set the activations for layer 1 to be the inputs to the training example (standard)
+perform forward propagation to perform a(l) for l=2:L (standard just output values)
+use y(i) to compute delta(L) = a(L) - y(i) %compute the error for each output node
+compute delta((L-1):2) using backpropogation algorithm  %no delta 1 remember
+
+DELTA(i)(j)(l) := DELTA(i)(j)(l) + a(j)(l)*delta(i)(l+1)
+this can be vectorised as 
+DELTA(l) := DELTA(l) + delta(l+1)(a(l)T.
+where DELTA(l) is a 2d vector i*j
+
+end
+
+%%outside for loop
+D(i)(j)(l) := 1/m*DELTA(i)(j)(l) + lambda*theta(i)(j)(l) if j ~= 0 (bias term)
+D(i)(j)(l) := 1/mDELTA(i)(j)(l) if j == 0 (bias term)
+
+%%it can be demonstrated that
+d/dtheta(i)(j)(l)J(theta) = D(i)(j)(l)
+
+the gradient for each theta valeu is equal to D 
+
+Backpropagation Intuition: 
+back prop algorithm is just like running the forward prop backwards:
+how did we end up with the delta value for the node infront?
+from the node times the thetavalue connecting it to the infront nodes by the delta values of the infront nodes.  
+
+this theta value is giving rise to this error
+this theta value is giving rirse to this error
+
+
+*the delta values are parital derivatives of cost function, that say how much the weights from the node must change to reduce the cost function*
+
+
+
+
+

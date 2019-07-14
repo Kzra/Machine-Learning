@@ -1,0 +1,25 @@
+ML week 2 
+Matrices dimensions written row x column
+A12^ first row second column#
+A vector is an n x 1 matrix 
+4 dimensional vector, vector with 4 values
+Capital letters, ABCDX to refer to matrices
+lowercase abxy refer to real numbers or vectors
+Rn refers to the set of n-dimensional vectors of real numbers.
+
+*Matrix addition*
+Add or subtract matrices is element wise. Dimensions must be th e same.
+Scalar multiplication or division, simply multiply or divide every element by the same scalar value. 
+
+*Matrix Vector Multiplication*
+Map each column of the vector onto each row of matrix (multiplying each element and summing the result). 
+Or can be understood as assign the first column of matrix to first row of vector, and same for the 2nd .. nth. Multiply each element by assigned scalar in vector. Then add across rows in matrix. - N.b. the columns of matrix must be equal to rows of vector. 
+THE RESULT IS A VECTOR m * n matrix * n *1 vector = m*1 vector
+
+*Matrix Matrix Multiplication*
+is the same, except we create a new colummn for the second column in the second term and multiply and sum each row in the first term in the same way. 4 * 3 matrix and an 3 * 2 matrix  will result in a 4 * 2 matrix. = [m * n] * [n * x] =  [m * x].
+essentially just treat the second matrix in a column by column manner and do matrix vector multiplication. 
+It therefore matters - for dimension compatibility - what order the multiplication is written in. Two multiply two marices, the number of columns of the first matrix must equal the number of rows of the second matrix. (because each column gets assigned a row(and column)). 
+ 
+
+

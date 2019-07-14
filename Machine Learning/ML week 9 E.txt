@@ -1,0 +1,90 @@
+ML Week 9 E 
+Recommender systems, collaborative filtering (an alternative to content based recommendations) 
+
+collaborative filtering is an algorithm capable of 'feature learning'
+
+imagine we ask users how much they like romantic films and actions films
+and that produces our theta. users specify theta. 
+we can then infer the values of x1 and x2 for each film (romance, and action) 
+
+essentially: 
+what feature vector should x1 be, so that theta1'x1 = 5 (if they love romance movies)#
+
+alice says she loves romance = theta(romance == 5 
+alice rates rabbits 2.5
+rabbits must have a romance of 0.5 
+so that theta*rabbits = 2.5
+
+Optimization algorithm: 
+
+Given theta(1..nu), to learn x(i) 
+
+minxi(1/2*sum(thetaj*xi-y(i,j)^2
+
+find a value of xi that when multiplied by theta comes up with an accurate rating of film
+
+combine with content based recommendations - but which comes first?
+if we have thetas we can learn xs
+if we have xs we can learn thetas
+
+randomly guess theta values, then learn features for films 
+then based on these features get a better estimate of theta parameters
+in turn use these to improve feature learning and so on....
+algorithm will converge to reasonable set of features and parameters. 
+
+collaborative: by rating movies, i help the system learn better features which in terms makes film predictions better for everyone. 
+
+collaborative filtering algorithm. 
+take both optimisation objectives covered:
+min theta
+min  x 
+and combine: min x and theta simultaneously 
+BOTH X and theta are R^n dimensional vectors. No need for theta0 == 1, if the algorithm thinks that is necessary, it can come up with it for itself 
+
+
+Collab filtering
+1. Initialise all x and theta to small random values
+2. Minimise combined J using gradient descent 
+3. for a user with parameters theta, and a film with learned features x 
+predict star rating thetaTx
+
+Low Rank Matrix Factorization:
+How to vectorize the collab filtering algorithm
+
+Y = [M] movies by ratings (i,j) elements of matrix = y(i,j) 
+predicted ratings can be written in matrix. where [(i,j) = theta(j)'(x(i)]
+predicted ratings can be written X*Theta' where X and Theta are matrices containing values x' and theta'
+
+== low rank matrix factorisation 
+
+Having run the algoritm: 
+We can find related films. 
+For each film i we have learned a feature vector xi 
+
+how to find similar film j 
+
+small ||x(i) = x(j)||, movies j and i are similar. 
+
+5 most similar to movie i, 
+find 5 movies j with smallest ||x(i) - x(j)||
+
+Implementation Detail: Mean normalisation
+
+if a user 5 hasn't rated any films 
+what to recommend? 
+n = 2 
+theta(5) = only term that effects theta 5 is the last regularization term (lambda/2*theta) 
+so theta(5) == 0
+so theta*x == 0, user is predicted to rate all films 0 
+but that's not useful, use other people's ratings. 
+
+instead normalise each film to have an average rating of 0,
+u will be a vector of what to subtract so that each film av rating is 0 
+
+then use this set of data on collab filtering algorithm
+to learn theta and x 
+then for a user predict theta'X + ui (bcos we subtract ui before) 
+for a new user 
+theta(5)'x == 0 + ui 
+so recommend higher ui films 
+

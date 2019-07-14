@@ -1,0 +1,47 @@
+ML Week2C 
+Normal equation - 
+Different way of solving optimal values for the parameters theta. 
+Solve theta analytically (not iterative). 
+
+for example if J(theta) was a quadratic function of theta. 
+use calculus to minimise a quadratic function. #
+take derivative of J with regard to theta, set at 0...
+that works when theta is a single real number
+what happens if theta is a vector n+1 ...
+
+could do partial derivatives of each parameter and set to 0.
+or...
+
+X = m*(n+1)d matrix
+y = m d vector 
+
+min value of theta = (XTrX)^-1XTry
+(XTrX)^-1 : inverse of the matrix XTrX
+ A  := XTrx
+inv(A) 
+
+MATLAB = inv(X'*X)*X'*y 
+gives optimal value of theta. 
+IF USING NORMAL EQUATION METHOD - THERE IS NO NEED TO DO FEATURE SCALING. 
+
+GD vs NE 
+GD: 
+Must choose a 
+need many iterations 
+Works well when feature number is large 
+
+NE: 
+inv(XtrX) is very slow when n is large [computing, cost of inverting matrix grows ^3) 
+n=100 easy
+n= 10000 difficult 
+
+Normal Equation Non Invertibility...
+What if inv(XTX) is not invertible (singular/degenerate)?
+inv or pinv 
+(pseudo)inverse
+pinv will work for non invertible matrices...
+so what is non invertible? 
+two common causes 
+1. redundant features, the features are linearly dependent eg size of house in feet and meters. e.g x1 = 3.28^2x2 in LA this prevents the matrix from being inverted 
+2. too many features m < n!!! 
+if so delete some features or use regularisation 

@@ -1,0 +1,49 @@
+Multivariate Gaussian Distribution 
+An extension of standard gaussian anomaly detection, can catch more examples. 
+
+normal gaussian detection won't understand linear relationships without explicit features
+so use multivariate...
+model p(x) all in one go, not separately 
+
+parameters p(x;u;SIGMA) 
+u = mean(vector of features)
+SIGMA = n*n covar matrix
+p(x;u;SIGMA) = 1/(2PI)*n/2*|SIGMA|^1/2
+
+|SIGMA| = determinant of sigma 
+
+can be used to model correlations between data
+SIGMA = [1,0.5;0.5,1]
+will give a linear pos correlation gaussian distribution 
+
+or SIGMA = [1,-0.5;-0.5,1]
+neg correlation
+
+vary u, varies peak of distribution 
+
+using Multivariate Gaussian Distribution in anomaly detection: 
+fitting parameters 
+
+u = 1/m*sum(x) 
+sigma = 1/m*sum(x-u)(x-u)'
+
+1. fit model p(x) by setting u and sigma
+2. given a new example x, compute p(x) 
+flag an anomaly if p(x) < sigma 
+
+relationship to original model 
+original model corresponds to multivariate gaussian where contours of model are axis aligned 
+ie u can use multivariate gaussian to give normal, if multivariate gaussian is constrained to axis 
+
+when to use original vs multivariate? 
+original: 
+manually create features to capture unusual combinations of values
+computationally cheaper, scales better
+okay if m is small
+
+multivariate:
+automatically capture
+expensive, have to convert inverse of SIGMA
+won't work if you have redundant features, i.e. x3 = x4 + x5 
+must have m>n or else SIGMA is non invertible 
+use only if m > 10n

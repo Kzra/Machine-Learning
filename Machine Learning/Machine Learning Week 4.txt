@@ -1,0 +1,80 @@
+Machine Learning Week 4 Neural Nets 
+
+Non-linear Hypotheses: 
+Why do we need neural networks?
+
+Adding polynomial terms to logistic/linear regression to account for non-linearity gets very complicated when we have more than two features. e.g. for n = 100 x1^2 x1n just for second order = 5000 features. Number of quadratic features grows n(^2)/2 Cubic(n^3) 
+Computationally expensive and risk of overfitting
+
+n is often v large for many machine learning problems
+for example, computer vision
+if the image has 50 pixels n = 2500 (50*50) (greyscale,7500 if rgb) = 3 million features
+
+Neurons and the brain: 
+Neural networks are biologically motivated
+Diminished usage in 90s, computationally expensive, resurgence today
+"One learning algorithm" Hypothesis - Somatosensory cortex can learn to see. One algorithm can process sight,sound touch etc. 
+New technology: 'learning with your tongue', 'interpret reflected sounds as sonar', 'haptic belt'
+
+
+Model representation: 
+Simple model of a neuron, one logistic unit: 
+Many inputs one output. 
+
+  input  output
+x0 --->
+x1 --->
+x2 ---> O ---> h(x)
+x3 -->
+
+
+X0 "bias unit" always equal to one.
+We call this an artificial neuron with a sigmoid(logistic) activation function. 
+theta = parameters = weights
+Neural network, group of sigle neurons strung together
+3 layer network
+layer 1 = input layer
+layer 2 = hidden layer
+layer 3 = output layer 
+
+
+aij = activation of unit i in layer j a12, activation of first unit in layer 2 
+thetaj = matrix of weights controlling the function mapping from one layer to another: first to second, second to third etc. 
+
+a12 = g(theta10(1)x0 + theta11(1)x1 + theta12(1)x2 + theta13(1)x3) 
+activation of first unit of layer 2 is calculated by sigmoid function of combined inputs and parameters of four features in layer 1. 
+in layer two theta  subscript = 20, 21, 22 23... first number is the node position in the layer, and the second is the index of the input. (its just a row column index of the matrix!)
+
+theta(1) will be a 3*4d matrix 
+if network has sj has units in layer j,sj+1 units in layer j+1, then that(j) will be dimension of sj+1 *([sj]+1) ... confusing the first one is subscript j+1 and the second term is +1. the +1 comes from the addition of the bias node and the x0 term. the input does not ever contain the bias node but the output will. 
+
+final output unit = h(x) = a1(3) (first unit of layer three in this case) = g(theta10(2)a0 + theta11(2)a1 +...theta13(2)a3)
+
+Vectorised implementation of hypothesis: 
+notation of forward propogation
+a1(2) first node in second layer = g(z1(2)) where z1 = (theta10(1)x0 + theta11(1)x1 ...)
+a3(2) = g(z3(2))
+
+
+x = [x0;x1;x2;x3]
+
+z(2) = [z1(2)
+	z2(2)	
+	z3(2)
+	]
+
+z(2) = theta(1)*x
+or
+z(2) = theta(1) *a(1)
+a(2) = g(z(2))
+and a(2) will be a vector containing the inputs to the next layer x(2) and a(2) are three dimensional vector. g(z(2)) will apply sigmoidal function element wise to z(2).
+
+add a0(2) = 1 % add the bias layer 
+a2 = 4d vector
+and then 
+z(3) - theta(2) * a(2)
+h(x) = a(3) = g(z(3))
+
+neural networks are essentially douign layered logistic regression, where the hidden layer is the features (and therefore we can use complicated features). In neural networks the computer gets to learn its own features that it feeds into logistic regression. 
+
+Architectures, how the neurones are connected to one another. 

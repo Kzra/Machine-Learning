@@ -1,0 +1,80 @@
+ML Week 8 B PCA 
+Dimensionality reduction - second type of unsupervised learning problem 
+Motivation 1: Data Compression 
+
+Reduce data from 2D to 1D, e.g. if feature 1 was length in inches and feature 2 was length in cm. any highly correlated features. 
+how to reduce?
+plot line through data, and then just measure the example as a position on that line.
+x(1) = x1,x2 =R^2
+x(1) = z(1) = R 
+project data onto line, an approximation. 
+
+reduce data from 3d to 2d 
+all data lines on same plain?
+project onto 2d plain, two numbers needed to specify point now x123 = z12
+
+Motivation 2: Data Visualisation 
+Represent an example that has many features with R^2 new features. easier to visualise features of countries better.
+
+50d -> 2d data reduction 
+z1 z2 
+
+PCA is an algorithm that let's us do both of these things.
+
+PCA problem formulation:
+Find a lower dimensional surface onto which to project the data, so that the sum of squares of the projection error is minimised. 
+Before applying PCA it is standard practice to perform mean normalisation and feature scaling. x1 x2 will have zero mean and comparable range of values. 
+Projection Error, how far do points have to move to get onto projection surface?
+
+Find a direction (a vector u(i) = R^nk onto which to project the data so as to minimize the projection error. The direction of the vector doesn't matter (they define the same projection line). 
+
+Reduce n dimensional to k dimensional. 3D to 2d. Find a pair of vectors that define a 2d surface onto which to project data. 
+in LA we say project the data onto the 'linear subspace' spanned by these vectors. 
+cosmetic similarity but completely different algorithm to linear regression. 
+projection error in PCA is the shortest orthogonal distance 
+in LR its a vertical line (we are trying to predict y with x) in PCA there is no y we are trying to predict, all features are important.
+
+PCA algorithm
+
+1. Data preprocessing
+feature scaling/mean normalization 
+u(j) = 1/m*sum(x(j)(i)) % compute mean of each feature
+replace each x(j)(i) with (xj) - u(j) %replace each feature x with x - mean
+
+If different features have v. different scales, scale each feature to have comparable range of values
+xj(i) - u(j)/s(j)
+where (s(j) = max - min or std of (j) 
+
+
+2. Reduce data from n dimensional to k dimensional 
+
+PCA has now to compute two things. 1. the vector(s) u which the data will be projected onto. 2. the values z, of the data on the new projection
+there is a complicated mathematical proof to determine u(1)
+
+Compute "covariance matrix"
+covar matrix = 1/m*sum(x1*x1)'
+sigma will be an n*n matrix
+Compute "eigenvectors" of covar matrix (sigma) 
+[U,S,V] = svd(Sigma);
+svd = singular value decomposition (as opposed to eig, svd is more numerically stable) 
+covar matrix always satisifies numeric positive semi definite principle
+N.B. sigma used to denote the covar matrix looks exactly like the summation symbol
+
+U,S,V are three matrices
+U is n*n
+U = [u1,u2,u3,u4] where u1 is a n*1 vector
+to reduce n to k 
+take first k vectors from u 
+
+this will give you a reduced matrix
+n*k 
+
+now compute z 
+
+z = Ureduce'*X 
+z == R^k (k*1) vector
+whixh is good beacause k represents all the new features that describing the example x 
+
+
+
+

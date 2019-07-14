@@ -1,0 +1,75 @@
+WEEK 11: Machine Learning Application Casestudy. PHOTO OCR 
+
+Photo OCR: Photo optical character recognition 
+Photo OCR pipeline: 
+
+1. Text Detection
+2. Character Segmentation 
+3. Character Classification
+
+Defining a problem as a pipeline is often the most critical step for a ML algorithm.
+What are the steps to acheive the desired end?
+
+Sliding Windows Classifier:
+Text detections is difficult, rectangles can have different aspect ratios. (ratio between height and width). 
+
+Supervised learning for pedestrian detection. 
+82*36 image patches
+learn on patches that contain pedestrains 
+and some that do not 
+neural network can identify an 82*36 image patch and decide whether contains pedestrian or not. 
+
+on a new image, take patch and slide across to cover entire image. and decide which patches contain pedestrians. Step size/stride - how far we move the rectangle. 
+take large patches, resize to 82*36 
+
+what about when we have different aspect ratios? 
+take a fixed size window and find text
+
+draw rectangles around all regions with text in image 
+
+take output classifier and apply to it expansion operator 
+is a pixel within 5 pixels of a white pixel? if so colour it white
+
+use heuristics to ignore rectangles with clearly wrong aspect ratios (too tall and thin) 
+draw rectnagles around the regions that look right 
+
+then do character segmentation. Use a 1D sliding window
+train character segmentation on patches that are midpoint between characters and patches that aren't
+1D - slide window in one straight line left to right. 
+
+then do character recognition - like we did for number recognition 1D sliding window on segmented characters
+
+Getting lots of data and artificial Data:
+Artificial Data Synthesis: create data from scratch/small labelled training set, amplify it into larger training set 
+e.g. Character Recognition 
+more training examples, take characters and paste against random backgrounds, unlimited supply of training examples for artificial data synthesis
+introduce distortions, warp character A to give more examples 
+this can help in speech recognition, distort it with various effects. 
+
+note, distortion u introduce should be representative of the distortions you see in the test set. just doing it arbirtariley is unlikely to help. 
+
+Discussion on getting more data:
+1. Before expending more effort getting more data, make sure you have a low bias high variance classifier (plot learning curves!) 
+2. How much work would it be to get 10x more data?
+Artificial data synthesis
+Collect/Label data yourself
+Crowd Source - Amazon Mechanical Turk (hire people on web to label large datasets for you)
+
+
+Ceiling analysis: What part of the pipeline to work on next 
+Estimating the error due to each component: 
+What part of the pipeline should you spend most time to improve? 
+
+
+Single real number evaluation metric for leaning system
+Character level accuracy? Photo OCR
+
+Overall 72% 
+Text Detection 89% (If we perfect text detection by manually telling algorithm where text is i.e. 100% td accuracy), look at effect on accuracy %
+perfect both character segmentation and td 90%
+performance increase 17% with perfect td
+1% with perfect cr
+10% with perfect cr
+
+Don't trust your gut feeling trust the analysis
+

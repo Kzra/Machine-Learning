@@ -1,0 +1,64 @@
+ML Week3 B Parameter setting in Logistic Regression 
+rewrite linear regression cost function 
+1/m*sum(i+1:m)1/2(h(x) - y)^2
+or simply 
+1/m*sum(Cost(hx),y)
+where Cost(h(x),y) = 1/2 (h(x) - y)^2
+
+for logistic regression this cost function will be 'non-convex', given the function h(x) is now sigmoidal. 
+
+non-convex means when J(theta) is plotted against theta the line is squiggly with many local optima. Gradient descent won't converge to global minimum. 
+need a nice bowl shaped function 
+
+Logistic regression cost function:
+Cost(h(x),y) = if y == 1: -log(h(x)), if y == 0: -log*(1 - h(x)) 
+Cost = 0 if h(x) = 1 y = 1 
+Cost = infinity, if h(x) = 0 y = 1.  Penalize learning algorithm by very high cost!! Good, don't misdiagnose tumours. 
+
+Convexity analysis - field that analyses cost functions to check whether they are local optima free. 
+
+Both LogisticR cost functions can be combined: 
+Cost(h(x),y) = -ylog(h(x)) - (1-y)log(1-h(x))
+if y ==1, (1-y) in second term sets it to 0 and so we just use first term
+if y ==0, -y is == 0 and therefore we just use second term
+
+Implementing into cost function
+J = 1/m*[sum(Cost(h(x),y)]
+J = -1/m*[sum(ylog(h(x) + (1-y)log(1-h(x))]
+
+This cost function is derived from statistiscs (Principle Maximum Likelihood Estimation) and is convex. It is therefore used by everyone. 
+
+How to minimise this cost function? Gradient Descent. 
+theta = theta - alpha*(d/dtheta*J)
+theta = theta - alpha*[sum(h(x) = y)*x)] ... identical to linear regression, what has changed is h(x), which is 1/1_e^-thetaTx. Definition of the hypothesis has changed. 
+
+Alternatively to gradient descent are other more advanced optimization algorithms:
+In order to do optimisation for LogisR we need two things
+the cost function J(theta)...why? because need to check convergence
+the partial derivative d/dtheta*J(theta)
+
+Other algorithms: 
+Conjugate gradient
+BFGS
+L-BFGS
+
+Advantages: 
+No need to manually pick alpha (they have innerloop that automatically picks optimum learning rate)
+Converge Faster than gradient descent
+BUT more complex, tho can be used without understanding the details. Don't write code yourself, use software library.
+
+With cost function and partial derivative possible to implement optimum gradient descent using fminunc on MATLAB. exitflag = convergence. 
+
+[jval,gradient] = costFunction(theta)
+jval = code to compute costfunc
+gradient(1...i) = code to compute partial derivative d/dthetai-1*J(theta)
+
+options = ...
+fminunc = ...
+
+
+
+
+
+
+

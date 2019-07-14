@@ -1,0 +1,96 @@
+Multivariate linear regression
+
+Feature = Variable 
+n = number of features 
+m = number of training examples
+x(i) = input(features) of the ith training example
+x^(i)¬j = value of the jth feature in the ith training example
+x^2 = vector of n features in 2nd training example (n dimensional feature vector)
+
+hypothesis for multiple feature regression: 
+H0X = theta0 + theta1x1 + theta2X2 +..... thetanxn
+
+for convenience of notation we add another feature x0 which always == 1 
+which meabs..
+
+Hypothesisx = theta0x0 + theta1x1....
+which can be written as 
+thetaT*x , T = transpose 
+
+in LA if you transpose a row vector by a column vector you multiply them. 
+
+
+it also means that the n dimensional feature vector is now indexed from 0 (with 0th index ==1).
+and the parameter vector is also indexed from 0. 
+
+
+We can write the parameters as just theta = which refers to the n+1 dimensional vector
+similarly we can write J(theta) - the cost function on that vector. 
+
+Feature scaling: to increase speed of gradient descent. Make sure features are on similar scale. You will see it on a countour plot. Very tall skinny countours e.g. so they algorithm spends all its time going vertical from side to side. 
+"We can speed up gradient descent by having each of our input values in roughly the same range. This is because ? will descend quickly on small ranges and slowly on large ranges, and so will oscillate inefficiently down to the optimum when the variables are very uneven."
+
+
+
+How to scale features...
+x1 = size feet(0-2000 feet)
+x2 = number of bedrooms(1 - 5)
+
+x1 = size(feet^2)/2000
+x2 = number of bedrooms/5 
+
+get every feature into approx -1 <= x <= 1 range
+if a feature has greater than 6 range or less than 0.5 scale!
+
+now they have similar values. so gradient descent takes a more direct path to global minimum. 
+
+Another different approach is called Mean normalisation...
+replace xi with xi-ui to make features have approx a zero mean. 
+(dont apply to x0) 
+ui = average 
+
+x1 = size-1000/2000
+x2 = #bedrooms-2/4
+
+-0.5 <= 0 >= 0.5 
+
+generalised = 
+training set...
+x1 = x1-u1/s1 
+s1 = max value - min value 
+u1 = average value of x1 in training set 
+
+
+*If gradient descent is working properly J(theta) should decrease after every iteration. 
+Automatic convergence test - algorithm to tell u if gradient descent has converged. ie if Jtheta decreases less than 10_3 in one iteration
+gradient descent not working, e.g. jtheta inreasing - reduce a..
+if a is sufficiently small, Jtheta should decrease with every iteration
+
+
+
+In linear regression - you can create your own features by yourself.
+e.g. frontage depth - combine x = Area = frontage * depth  
+Use your own insight to define new features. 
+
+Polynomial regression - fit nonlinear models to data 
+just assign new xs e.g.
+x1 = size 
+x2 = (size)^2
+x3 = (size)^3 
+
+h0 = theta0x0 + theta1x1 + theta2x2 etc..
+allows great deal of model complexity. Cubic fit to data etc.. 
+
+must do proper feature scaling
+ size :1 - 1000
+size^2 : 1 - 100000
+size^3 : 1 - 10^9 
+
+
+many features 
+sqrt(size)...
+
+because the theta parameters are changing a lot of types of curve can be fit. 
+useful to know the shape of functions, quadratic, cubic etc..
+
+algorithms exist that automatically choose features for you 

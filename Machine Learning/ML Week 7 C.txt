@@ -1,0 +1,45 @@
+ML Week 7 C 
+Using an SVM:
+use SVM software package, liblinear,libsvm, to solve for parameters theta
+need to specify choice of C parameter
+choose kernel 
+no kernel = linear kernel (y = 1 theta'X >= 0 ) 
+when? is n is large and m if small (many features and small training set) 
+gaussian kernel (choose sigma) if n is small and m is large 
+
+often you have to provide kernel function
+
+f(i) = kernel(x1,x2) 
+f = exp(- ||x1-x2||^2/2*simga^2
+return
+
+note: perform feature scaling before using gaussian kernel 
+because norm ||x-l||^2 which is x(j) - l(j)^2 
+if the features of x aren't scaled the norm terms for each feature will be  heavily skewed toward large features
+
+
+note: not all similarity functions: similarity(x,l) make valid kernels. 
+(Need to satisfy a technical condition called 'Mercer's Theorem' to make sure SVM packages' optimisations run correctly and don't diverge. 
+
+other kernels: 
+polynomial kernel (xTl+n)^2,(xTl)^3,(xTl+1)^4 (two parameters, what number do you add, what exponent) 
+string kernel (text processing) 
+chi-square kernel 
+histogram intersection kernel 
+
+Multi-class classification
+Many SVM packages have multi-class classificaiton built in
+Otherwise, use one vs all method 
+Train K svms, one to distinguish y = i from the rest for i = 1:K )
+pick class i with largest thetaTX 
+
+
+Logistic regression vs SVMs
+n = number of features
+m = number of training examples 
+if n is large relative to m = use logistic regression or linear kernel SVM
+if m is intermediate relative to n = use SVM with gaussian kernel 
+if n is small and m is very large: create add more featues, use logistic regression or SVM without a kernel 
+neural network will work for all of these problems, but might be slow
+
+SVM optimisation is convex, so global minimum always found (not case with neural network) 

@@ -1,0 +1,73 @@
+Machine Learning Week 8: Unsupervised learning algorithms
+Clustering
+
+Unsupervised learning: unlabelled data x1..xm
+clustering: algorithm that finds clusters in data set
+
+why?
+market segmentation
+social network analysis(groups of people you email most frequently) 
+organise computing cluster (know which computers tend to work together) 
+astronomical data analysis 
+
+k-means algorithm 
+most widely used clustering algorithm 
+randomly initialise two points(cluster centroids) 
+iterative
+1. cluster assignment step 
+assign data points to one of cluster centroids depending on which cluster centroid its closest too
+2. move centorid step - move cluster centroids to average of points assigned to it
+
+input 
+k = number of clusters to find in data
+training set(x1..nm) 
+
+(xi) = Rn vector
+no x0 so just n features
+
+randomly initialise K cluster centroids u1,u2...uK
+repeat
+{
+for i = 1:m
+c(i) := index(from 1 to K) of cluster centroid closest to x(i) c(i) := min(k)||x(i) - uk||^2 (distance between x and cluster centroid)
+for k = 1:K
+uk := average(mean) of points assigned to cluster k 
+}
+
+if no points get assigned to a cluster centroid we eliminate the cluster
+
+k-means for non-separated clusters can still work. market segmentation. 
+u(c)(i) = cluster centroid of cluster to which example x(i) has been assigned 
+c(i) = 5 uc(i) = 5 
+
+J = 1/m*sum(||x(i) = u(c)(i)||^2
+J = cost function = distortion function
+1.try to find c(i) that minimises J (make the right assigments) 
+2.minimises J with respect to uk variables 
+
+Clustering
+random initialisation
+one highly recommended method: 
+K < m 
+Randomly pick K training examples
+set u1..K equal to these examples
+
+however depending on where you intialise, Kmeans can give different solutions, and can end up at local optima (of J)
+to prevent: try multiple random initializations, and pick clustering that gave lowest J 
+this is particularly important if you have a small number of clusters (K = 1:4) 
+
+Choosing the number of clusters, value of parameter (K) 
+normally do it manually 
+can use the *elbow method*
+visualise cost function J against number of clusters 
+find clear 'elbow' where the plot levels, and take that value of K 
+often not this simple 
+
+a different way, see how many clusters suit downstream purpose best 
+use your own evaluation metric 
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+ML WEEK 5 C 
+
+Putting it all together:
+Training a neural network
+1. Pick network architecture
+Input Units
+Hidden Units
+Output Units
+3,5,5,5,4
+3,5,4
+
+Input units = Dimension of features (x(i))
+Output units = Number of classes
+Default should be to use a single hidden layer
+Default if you use more than one hidden layer, keep the same number of units in each layer
+The more hidden units the better! But.. more hidden units is more computationally expensive
+Twice the number of input features?
+
+Training a neural network: 
+2. Randomly initialize weights
+3. Implement forward propogation to get h(x) for any input X 
+4. Implement code to compute cost function J
+5. Implement backprop to compute partial derivatives 
+
+for i = 1:m 
+perform forward and back prop 
+produce a(l) and d(l) terms
+end
+^Vectorising this is v. complicated
+
+then 
+DELTA(l) = DELTA(l) + delta(l+1) * a(l)T
+
+use DELTA to compute partial derivative terms
+
+6. Use gradient checking to compare partial derivatives with numerically computed ones
+
+7. Disable gradient checking 
+
+8. Use optimisation algorithm (such as GD) with backprop to try and minimise J(theta) as a funciton of parameters. 
+J(theta) - Non Convex, w/ gradient descent can get stuck in local optima, but normally very good.
+
+Autonomous Driving

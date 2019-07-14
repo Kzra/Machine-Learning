@@ -1,0 +1,41 @@
+Machine Learning Week 3 Classification 
+Trying to predict variable y, binary two values 0 (negative class), 1(positive class) 
+or many = multiclass y  0,1,2,3
+
+one way, linear regression than threshold classifier output. 
+h(x) > 0.5 = y 
+etc.
+doesn't work well if the data isn't neatly distributed 
+linear regression can output values hx >1 or <0 even though y should only take on y = 0 or 
+
+instead use logistic regression, output always between 0 and 1 == classification algorithm 
+don't be confused by regression
+
+modify the linear reg hypothesis 
+
+h(x) = g(thetaTx) 
+where g = 1/1+e^-z, this is the sigmoid function or logistic function
+z = real number variable, replace with thetaTX h(x) = 1 /1+e^-thetaTx
+sigmoidal curve asymptotes at 0 and 1 as z term approachs - or + infinity 
+therefore h of x must be between 0 and 1 
+
+*use a learning algorithm to fit theta parameter*
+
+h(x) interpreted as estimated probability that y = 1 on input x 
+e.g. 70% certain tumour is malignant 
+h(x) = p(y=1 | x;theta)
+probability of y =1 given x paramerized by theta 
+
+suppose predict y =1 if h(x) >= 0.5 
+g(z) >= 0.5 when z >= 0 or thetaTx >=0 
+
+therefore predict y = 1 if thetaTx >= 0 
+decision boundary = line predicted by h(x) = g(theta0...) 
+predict y = 1 if -3(theta0) + x1 + x2 >= 0 
+x1 + x2 = -3 (straight line where h(x) == 0.5) that determines  whether thetaTx is above or below 0 and therefore what the decision should be  
+
+
+Non-linear decision boundaries. 
+just like in polynomial regression we can add extra higher order polynomial features
+for example predict y =1 if -1 +x1^2 + x2^2 >= 0 
+will look like a circle.

@@ -1,0 +1,18 @@
+Data for Machine Learning: How much data to collect?
+Banko and Brill 2001 - performance for word classification is driven by the number of training examples. 
+'It's not who has the best algorithm that wins, it's who has the best data'
+
+When is this true?
+- When we have informative features
+- When the bias is low
+
+
+Assume features x have sufficient info to predict y accurately. 
+Useful test of this: given the input x, can a human expert confidently predict y?
+
+Use a learning algorithm with many parameters. Fit complex functions. Low bias. J(train) will be small. Use a huge training set, means unlikely to overfit. 
+J(train) = J(test) = small
+
+Essentially address bias by having learning algorithm with many parameters, and ensure variance is low using large dataset. 
+
+

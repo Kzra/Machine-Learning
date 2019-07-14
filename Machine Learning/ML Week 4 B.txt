@@ -1,0 +1,108 @@
+ML week 4 neural network application = Creating Logic Gates
+Imagine an XOR/XNOR decision boundary 
+y = x1 XOR x2 
+lets use: 
+y = x1 XNOR x2 
+AKA NOT(X1 XOR X2)
+so pos examples only if both are true, or both are false 
+
+
+simple example = AND
+
+y = x1 AND x2 
+add bias
+
+x0 
+x1     -->  O ---> h(x)
+x2 
+
+x0 theta -30
+x1 theta 20
+x2 theta 20
+
+h(x) = g(-30 +20x + 20x2) or g(theta10(1) theta11(1) theta12(2))
+
+truth table
+x1 x2 h(x)
+0  0   g(-30) == 0
+0  1   g(-10) == 0
+1  0    g(-10) == 0 
+1  1    g(10) == 1 
+
+OR
+
+x0 theta = - 10
+x1 theta = 20
+x2 theta = 20
+
+ 
+NEGATION (NOT x1)
+x0 10
+x1 -20
+
+x1 h(x)
+0  g(10) = 1
+1  g(-10) = 0
+
+NOT (x1) AND NOT(x2)
+
+x0 10
+x1 - 20
+x2 - 20
+
+x1 x2 h(x)
+0  0  g(30) = 1
+0  1  g(-10) = 0
+1  0  g(-10) = 0
+1  1  g(-10) = 0
+
+
+XNOR 
+put AND, NOT AND NOT, OR together
+use a hidden layer
+
+a1(3) = h(x)
+
+x1 x2 a1(2) a2(2) h(x)
+0  0  0      1     1 
+0  1  0      0     0 
+1  0  0      0     0
+1  1  1      0     1
+
+theta(1)
+
+-30 20 20 
+10 -20 -20
+
+theta(2)
+-10 20 20 
+
+Applied - Handwritten digit classification
+
+
+Multi-class Classification: 
+number detection - 10 class 0 to 9 
+one vs all
+
+pedestrain
+car
+motorcycle
+truck
+
+h(x) vector = 1;0;0;0 when pedestrain
+car = 0;1;0;0
+motor = 0;0;1;0
+truck = 0;0;0;1
+
+previosuly = y = 1,2,3,4
+now y = one of above vectors
+x(i) = image
+y(i) = vector
+
+and just build 10 different neural nets each one can recognise one of those things
+combine to make y vector
+[h(x)(1)
+h(x)(2)
+h(x)(3)
+h(x)(4)
+]

@@ -1,0 +1,89 @@
+How to evaluate an anomaly detection algorithm
+
+Assume we have some labeled data, anomolous and non anomolous examples 
+(y = 0, normal) (y = 1,anomalous) 
+
+Training set - no anomolies 
+
+Test set 
+Cross val set - contain anomolies 
+
+10,000 good engines 
+20 bad 
+
+test = 6000 good, use to fit p(x) 
+CV = 2000 good, 10 bad 
+Test, 2000 good, 10 bad 
+
+Algorithm evaluation
+fit p(x) 
+on crossval/test, predict
+y = 1 or 0 if p < or > epislon
+
+evoalution metrics
+true positive
+precision/recall
+f1 score 
+
+use cross val set to choose parameter epsilon 
+
+Anomaly Detection vs Supervised Learning 
+If we are labelling data anyway, why not use supervised algorithm?
+E.g. Logistic regression to learn when parameters indicate anomaly 
+
+Anomaly detection:
+V. small number of positive examples (y = 1) 
+large number of negative example, useful to fit p(x) 
+many different types of anomaly, so difficult to learn form positive examples what anomalies might look like. 
+
+
+supervised learning:
+large number of negative and positive examples 
+enough positive examples to get a sense of what pos examples are like, and future pos examples likely to be similar to those in training set 
+
+Applications: 
+
+Anomaly detection: 
+Fraud detection
+Manufacturing
+Monitoring machines in data centre
+
+Supervised learning
+Spam Classification
+Weather Prediction
+Cancer Classification
+
+Choosing what features to use: 
+
+gaussian features can be modelled p(x,u,sigma^2) 
+first plot histogram of feature, make sure it looks gaussian, algorithm will also work alright on non-gaussian features 
+
+if data looks non gaussian, try transformation to make data more gaussian: 
+log?
+or log (x + c) , constant an integer
+or try ^0.5 sqrt
+or cube root, etc.
+xnew = x.^0.5
+feed new feature into anomoly detection algorithm
+
+coming up with features: 
+error analysis procedure 
+
+we want high p(x) for normal examples and small for aomolous 
+
+most common problem is that p(x) is comparable for both types of examples
+create new features untill it gets cross val set right 
+
+look at an anomolous example, draw inspiration for new feature based on it
+
+Monitoring computers in a data centre
+choose features that would have v high or low values in event of anomaly 
+memory use
+number of disk accesses/sec
+cpu load
+network traffic 
+
+cpuload and network traffic should grow linearly together 
+so high load with normal network traffic - anomaly 
+create new feature x5 = cpu load/network traffic 
+

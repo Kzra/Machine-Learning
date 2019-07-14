@@ -1,0 +1,46 @@
+ML week 2 
+Matrices dimensions written row x column
+A12^ first row second column#
+A vector is an n x 1 matrix 
+4 dimensional vector, vector with 4 values
+Capital letters, ABCDX to refer to matrices
+lowercase abxy refer to real numbers or vectors
+Rn refers to the set of n-dimensional vectors of real numbers.
+
+*Matrix addition*
+Add or subtract matrices is element wise. Dimensions must be th e same.
+Scalar multiplication or division, simply multiply or divide every element by the same scalar value. 
+
+*Matrix Vector Multiplication*
+Map each column of the vector onto each row of matrix (multiplying each element and summing the result). 
+Or can be understood as assign the first column of matrix to first row of vector, and same for the 2nd .. nth. Multiply each element by assigned scalar in vector. Then add across rows in matrix. - N.b. the columns of matrix must be equal to rows of vector. 
+THE RESULT IS A VECTOR m * n matrix * n *1 vector = m*1 vector
+
+*Matrix Matrix Multiplication*
+is the same, except we create a new colummn for the second column in the second term and multiply and sum each row in the first term in the same way. 4 * 3 matrix and an 3 * 2 matrix  will result in a 4 * 2 matrix. = [m * n] * [n * x] =  [m * x].
+essentially just treat the second matrix in a column by column manner and do matrix vector multiplication. 
+It therefore matters - for dimension compatibility - what order the multiplication is written in. Two multiply two marices, the number of columns of the first matrix must equal the number of rows of the second matrix. (because each column gets assigned a row(and column)). 
+
+**Matrix Multiplication Properties** 
+Matrices aren't commutative A*B not equal B* A
+Matrices are associative (A*B)*C = A*(B*C)
+
+Identity matrix = when multiplied by a matrix of same dimensions results in the original matrix.  
+Has 1s on the diagonal (upper left to lower right) and 0s elsewhere. 
+When multiplying the identity matrix after some matrix (A*I), the square identity matrix's dimension should match the other matrix's columns. When multiplying the identity matrix before some other matrix (I*A), the square identity matrix's dimension should match the other matrix's rows.
+ 
+INVERSE and TRANSPOSE 
+The inverse of a matrix is denoted by A^-1, multiplying by the inverse of a matrix gives us the identity matrix.
+In other words, the upper right - bottom left values multiplied by its inverse will equal 1 and the other values will equal 0.
+
+Square Matrix = rows == col 
+Non square matrix does not have an inverse function	
+Matrices that don't have an inverse function are singular or degenerate. e.g. all zeros. 
+Good way of thinking of inverse.  A number that when you times x by will give you 1. so for x = 3 it is 1/3, 12 1/12 etc. 
+
+Transpose 
+flip 90 and reverse
+BIJ is equal to AJI.
+
+
+

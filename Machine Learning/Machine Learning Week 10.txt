@@ -1,0 +1,127 @@
+Machine Learning Week 10 
+
+Learning with large datasets
+
+take m = 100 million 
+gradient descent, you will have to carry out a summation over 100 mil terms to compute derivative terms to take one step.
+how to sanity check whether you need 100 million examples? plot a learning curve 
+
+m vs error, compare J train and Jcv 
+
+stochastic gradient descent, modification to original gradient descent algorithm which allows scaling to much bigger datasets.
+
+theta = theta - alpha 1/m sum(h(x) - y)*x 
+sum over all examples every time == batch gradient descent 
+
+
+stochastic gradient descent 
+1. randomly shuffle the dataset
+2. repeat (for i = 1:m) 
+for every j
+thetaj = thetaj - a(h(x)-y)*xi(j)
+
+looks at each example separately and modifies parameters to fit each one a bit better
+important to be randomly sorted to speed up convergence 
+
+if you plot the parameter error traversal. it doesn't go direct to global minimum, wanders about and gets there eventually 
+often you have to take multiple passes through entire dataset (x10)
+
+Mini-Batch gradient descent 
+batch: use all m examples in each iterataion
+stochastic: use 1 example in each iteration
+mini-batch: use b examples in each iteration 
+b = 2-100
+
+get b examples each time for training set x(i...xi+9) y(i...yi+9)
+i = i+10
+repeat 
+theta = theta - 1alpha*1/10
+
+mini b vs stochastic: 
+mini b will outperform stochastic only if you have a good vectorised implementation, 
+this will allow you to partially parralelise your summation over b examples 
+disadvantage: extra parameter b to fiddle with 
+
+
+Stochastic Gradient Descent convergence: 
+How to make sure the stochastic grad algorithm is converging properly?
+how to tune learning rate, a?
+ 
+batch gradient descent, plot Jtrain as a function of iterations, make sure it is decreasing, this requires summation over m 
+instead 
+compute cost (theta,x,y) before updating theta using x and y 
+compute the cost of how well current value of theta does on next training example (before updating theta)
+then, every 1000 iterations, plot cost(theta,x,y) averaged over the last 1000 examples processed by the algorithm 
+
+
+Checking for convergence: 
+cost will be noisy, but generally decreasing, if grad desc is working
+parameters oscillate around globla minimum, smaller a, fewer oscillations 
+
+
+normally we hold alpha constant
+if we do what complete convergence
+slowly decrease alpha over time
+e.g. alpha = constant 1/iteration number + consst 2 
+
+Online Learning: 
+Continual stream of data coming in 
+
+Shipping service:
+Features x capture properties of users, origin/destination and asking price 
+p(y=1|x;theta) 
+repeat forever
+user arrives, get x,y pair corresponding to user 
+update theta using just this example 
+thetaj = thetaj - a(h(x) -y)xj
+can adapt to changing user preferences 
+
+other online learning example: 
+product search(learning to search) 
+user searches android phone 1080p camera
+have 100 phones in store, will return 10 results.
+define probability of user clicking on phone  
+learn p(y=1|x;theta) == predicted CTR (click through rate)
+show user 10 phones they are most likely to click on 
+
+both of these examples could be operated with a saved training set, but if you have that much data coming in, just learn continuously 
+
+Map-reduce and data parrallelism: 
+Some machine learning problems are too big to be run on one machine
+Map reduce is an alternative to stochastic gradient descent, can work on very large problems 
+Map reduce(1:400)
+4 machines: split training set into four
+Machine 1: Use (x(1),y(1))....(x(100),y(100))..Machine 4
+temp(1)j = sumi=1:100(h(x)-y)xj
+temp(2)j
+temp(3)j
+temp(4)j
+
+THEN COMBINE
+thetaj = thetaj- alpha*1/400(temp1J+temp2J temp3J + temp4j)
+j = 0..n
+
+essentially divide batch up into 4 and take average
+
+where can i apply map reduce? 
+can my learning algorithm be expressed as performing sums of functions over the training set 
+e.g. for advanced optimisation we need to provide
+1. cost function (which involves sum over training set) 
+2. routine to compute partial derivative terms (sum over training set) 
+split over machines, central server sum up temps an pass to optimisation algorithm
+Multi-core machines: 
+Single PC may have multiple CPU, and in a CPU multiple cores
+Map-reduce on single computer is therfore possible, by sending to different cores. 
+Single machine means don't have to worry about network latency 
+
+Some linear algebra libraries will split vectorised implementations automatically. 
+
+
+
+
+
+
+
+
+
+

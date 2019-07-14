@@ -1,0 +1,7 @@
+ML Week3 C Multi-Class Classification
+Weather = Sunny (y=1), Cloudy (y=2), Rain(y=3),Snow(y=4)
+how to do multiple classification? 
+one vs all (or one vs rest), treat as series of binary classification problems. 
+h1(x) = standard classifier, decision boundary class 1 or not 
+h2(x) = ''class2
+h3(x) = ''class3

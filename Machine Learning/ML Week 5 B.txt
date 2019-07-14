@@ -1,0 +1,77 @@
+ML Week 5 B
+Implementation detail of BP 
+Unrolling parameters
+Using advanced optimisation requires your thetavalues and gradients to be vectors, not matrices
+
+L = 3
+
+Theta 1 = R^10*11
+Theta 2
+Theta 3 
+D1
+D2
+D3
+
+convert matrices to vectors
+
+thetaVec = [Theta1(:),Theta2(:),Theta3(:)] %puts them all into a big long vector
+Theta1 = reshape(thetaVec(1:110),10,11)
+
+
+costFunction(thetaVec)  %first step of costFunction is to reshape thetaVec to get vectors in usable form as matrices
+
+Use forward prop/back prop to compute D(1), D(2)... and unroll to get gradientVec 
+
+function [jval, gradientVec] = costFunction(thetaVec)
+
+Gradient Checking: 
+Backprop prone to many bugs 
+apprxomiate derivative of theta with respect to J(theta) by connecting (theta + epsilon) and (theta - epsilon) with straight line. 
+which can be written as
+
+d/dtheta*J(theta) == J(theta+epislon) - J(theta-epsilon)/2(epsilon) % this is called the twosided difference formula, derivatives in the partial differential equation are approximated by linear combinations of function values at the grid points
+epsilon = 10^-4, good value 
+
+
+Implement in MATLAB
+gradApprox = (J(theta + EPSILON) - J(theta - EPSILON))/(2*EPSILON)
+
+
+what about when theta is an unrolled parameter vector...
+theta = [theta1;
+          ...
+         thetan]
+
+in each case the partial derivative is 
+J(theta1+epsilon,2,3,4...) - J(theta1-epsilon,2,3,4)/2epsilon
+J(theta1,2,3,4,...n+epsilon)- J(theta1,2,3,4...n-epsilon)/2epsilon
+in MATLAB
+
+for i =1:n,
+thetaPlus = theta; %reset theta each time
+thetaPlus(i) = thetaPlus(i) + EPSILON; 
+thetaMinus = theta; 
+thetaMinus(i) = thetaMinus(i) - EPSILON; 
+gradApprox(i) = (J(thetaPlus) - J(thetaMinus))/(2*EPSILON)
+end;
+
+check that gradApprox == DVec (approx)
+numerical gradient checking is v slow, so once you are happy that backprop is working properly turn off gradient checking and use backprop for learning
+
+Random initialization:
+For gradient descent and advanced optimization method, need initial value for theta 
+zero initialization thetaijl = 0 for all ijl so (a values same across a layer) a21 == a22, delta values will also all be the same across a layer. partial derivatives of weights from each node will be identical, even after one iteration of gradient descent. 
+
+summary:
+Zero Initialisation, After each update, parameters corresponding to inputs going into each of the two hidden unnits are identical. 
+Hidden units compute exactly the same function of input even after iterations of gradient descent. Neural net can't compute interesting and complex functions. all nodes in layers are identical. 
+
+random initialisation is symmetry breaking. Intialise each thetavalue to a random value [-epislon +epsilon] between two.
+
+MATLAB:
+Theta1 = rand(10,11)*(2*INIT_EPSILON) - INIT_EPSILON %NOTE INIT_EPSILON is distinct from the EPSILON value we were using in gradient checking
+Theta2 = rand(1,11) *(2*INIT_EPSILON)- INIT_EPSILON
+
+%rand(x,y) is a MATLAB function that will intialize a matrix of random real numbers between 0 and 1
+
+

@@ -1,0 +1,60 @@
+Machine Learning Week 7B 
+
+Adapting SVM to non-linear problems: Kernels
+Kernels 
+Are there a better choice of features than high order polynomials? (which can be computationally too expensive). 
+Given x, compute new features depending on proximity to landmarks l(1),l(2),l(3)
+f1 = similarity(x,l(1)) = exp(||x-l(1)||^2/(2*sigma)^2)
+...
+
+similarity function = kernel function
+gaussian kernel = exp(||x-l(1)||^2/2*sigma^2)
+||x-l(1)||^2 == sum(j = 1:n) (xj - lj(1))^2 (sum of components squared) 
+
+if x is close to l1 = f1 == 1 
+exp(-0/2*sigma(2)) == 1 
+
+if x is far from l1 
+f1 = exp(-largenumber^2/2*sigma^2)) == 0
+
+given a training example x 
+three landmarks allows us to compute three new features 
+
+sigma^2 is a parameter of the gaussian kernel, varying it gives different effects 
+sigma^2 == 0.5
+contours shrink on contour plot (x1,x2) f1 
+f1 falls to 0 more rapidly 
+
+sigma^2 == 3 
+f1 falls to 0 slowly as we move away from l1 
+
+kernels allow us to learn complex hypotheses 
+
+Choosing landmarks and other similarity functions 
+Put landmarks wherever you have training examples 
+m landmarks 
+features will measure how close an example is to what you saw in training set
+feature vector f0(i) to fm(i) f0(i) == 1 
+f = Rm+1 d vector
+theta = Rm+1 vector
+predict y = 1 if theta'f >= 0 
+
+learn theta with SVM cost function, 
+cost1(theta'f(i))
+replace x(i) with f(i) 
+
+this means we have n == m features 
+one modification to cost function...
+
+sum(theta(j)^2) can be written as theta'theta if we ignore theta0
+(mathematical detail allows SVM to run more efficiently when m is v big) 
+
+why don't we use kernels for logistic regression?
+we can, but it is v slow 
+SVM has computational tricks built in to make it fast  
+
+SVM parameters
+C = large C, low bias high variance
+small C high bias low variance 
+
+sigma^2 , if large features vary smoothly, large high bias, low variance 

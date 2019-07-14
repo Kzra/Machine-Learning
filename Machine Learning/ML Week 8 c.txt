@@ -1,0 +1,57 @@
+ML Week 8 C 
+Applying PCA 
+
+Reconstruction from compressed representation:
+go back to approximation of original high dimensional data 
+z(i) - x(i) 
+
+z = Ureduce'X
+xapprox = Ureduce*z
+x approx == n dimensional vector 
+
+Choosing k, the number of principal components:
+average squared projection error: minimise distance between x and xapprox 1/msum(||x-xapprox||^2 
+total variation in the data: 1/m*sum(||x(i)||^2) average length squared of training examples, how far are training examples from 0 
+
+typically, choose k to be smallest value so that 
+average squared projection error/total variation in the data < 0.01 
+meaning 99% of variance is retained
+
+how to implement?
+
+algorithm
+try PCA with k = 1
+Compute Ureduce,z(1),z(2)
+check if 99% variance is retained
+keep increasing k until this condition is true. 
+
+[U,S,V] = svd(Sigma) 
+S = Diagonal non zero matrix 
+For given k, variance can be computed as 
+1 - sumi:k(Sii)/sumi:n(Sii)
+essentially sum of Ureduced diagonal entries divided by all diagonal entries 
+
+this is a much more efficient procedure, svd only has to be called once, and we just increase the k parameter that we look at in S 
+
+How to use PCA to speed up a learning algorithm:
+Extract inputs from labelled training set
+giving unlabeled dataset x(1).x(m)  = R^10000
+apply PCA
+z(1)..z(m) = R^1000
+
+new training set 
+(z(1),y(1))...(z(m),y(m))
+feed this new training set to learning algorithm
+
+new examples, map through PCA, and apply hypothesis 
+
+note: the mapping x(i) to z(i) should be defined by running PCA only on the training set. This mapping can be applied as well to the examples xcv(i) and xtest(i) in the cross val and test sets. 
+i.e. Ureduce is a parameter learned by PCA. Paramaters should only be learned on training set. Same as mean normalisation or scaling factors. 
+
+
+bad use of PCA - less likely to overfit data! 
+fewer features less likely to overfit? 
+instead use regularization, you will not lose valuable information, PCA doesn't pay attention to y labels
+
+always check, how about doing the whole thing without PCA? 
+

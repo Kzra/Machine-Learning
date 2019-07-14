@@ -1,0 +1,68 @@
+ML Week3 D Problem of Overfitting 
+
+Overfitting: 
+Straight line that doesn't really fit data(which is say quadratic) = underfit/high bias. Bias - the algorithm has a strong preconception that house prices will vary linearly with house size. 
+
+Other extreme - we use a fourth order polynomial. We fit all the points but the line is wiggly = overfit/high variance. The space of possible hypotheses that would fit this function is too large, not enough data to constrain it.
+
+Overfitting: if we have too many features, learned hypothesis may fit training set bery well but fail to generalise to new examples. Essentially it tries to hard to fit the training set, so can't predict new prices. 
+
+
+Addressing overfitting: 
+Difficult always to just plot and sense by intuition - sometimes there will be too many features. 
+1. Reduce feature number. Model selection algorithms will choose features for you.
+2. Regularization. Keep all features but reduce magnitude of theta parameters.
+
+Regularization: Cost function
+Cost function aims to minimise. If we add n*theta(x) values to the end of the cost function the function will minimise size of theta to close to 0. (theta will still have some value because of its importance in h(x) which determines the original cost function calculation.
+
+e.g.
+
+h(x) = theta + theta1x1 +theta2x^2 + theta3x^3 + theta4x^4
+
+min(theta) = 1/2m*sum[(h(x) - y)^2 + 1000*theta3 + 1000 *theta4] 
+
+will become v similar to quadratic. 
+
+Small values for parameters means simpler hypothesis which is less prone to overfitting. (smoother functions) 
+But how to know which ones to shrink?
+
+linear regression: 
+penalise them all...
+COST = J(theta) = 1/2m*sum[(h(x) - y)^2] + lambda*sum[theta^2] --- this final term sums from theta1
+lambda = regularization parameter
+two goals: 
+fit training data well
+keep parameters small 
+lambda controls the trade off between these two goals. 
+If we set lambda too high, we will underfit, theta will be too low to even fit training set. 
+Fit flat line to data. 
+
+applying regularized linear regression: 
+
+gradient descent: 
+for j = 1...n (don't need to change theta0)
+thetaj = thetaj = a/m*sum((h(x) - y)*x) + y/m*thetaj
+..
+thetaj = theta(1-a*(lambda/m)) - a*1/m*sum[((h(x) - y)*x)]
+1-a*lambda/m term is always <1 
+so essentially thetaj gets replaced by a new thetaj that has been shrunk toward 0.
+
+normal equation: 
+theta = (XTX + lambda*(n+1 by n+1 dimensional matrix, with ones on all diagonal apart from top left) * XTy
+
+non-invertibility?
+m < n
+fewer examples than features
+if lambda is > 0 the matrix will always be invertible
+regularisation takes cares of non ivertibility issues
+
+applying regularized logistic regression: 
+same costfunction + lambda/2m*sum(thetaj^2)
+gradient descent: 
+identical to linear regression except h(x) is different (sigmoidal) 
+
+
+USING REGULARIZED ADVANCED OPTIMISATION
+NEW COST FUNCTION
+New theta1...m terms

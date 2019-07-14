@@ -1,0 +1,45 @@
+Machine Learning Week 9 D 
+Recommender Systems
+
+Algorithms that can 'learn' what features it should use.
+
+Example: 
+Predicting movie ratings 
+
+User rates movies using zero to five stars 
+
+Movie Alice Bob John Jeremy 
+Love  
+Dog  
+Trucks
+
+nu = number of users 
+nm = number of films
+r(i,j) = 1 if user j has rated film i
+y(i,j) = rating given by user j to film i (define only if r(i,j) = 1) 
+
+recommender system problem...predict what a user will rate film
+
+content-based
+create features that describe films, each film can be represented by a feature vector 
+
+x1(romance) 
+x2(action) 
+n = 2
+each value in feature vector correspodns to a different film 
+
+for each user, learn a parameter theta - Rn+1. Predict user j as rating move i with theta'x starts 
+each user is associsated witha  unique parameter vector 
+
+so what does alice think of trucks?
+x3 = x0+romance+action
+x3 = [1;0.99;0]
+theta 1 ' x3 = 4.95.
+
+How to learn parameter theta j 
+1/2m(j)*sum(r,i,j=1) thetaj'X(i) - iy(i,j)^2 + lambda/2m(j) *sumk=1:n(theta(j,k)^2
+sum all the films user j has rated
+learn theta(j) 
+minimise this u will get a good prediction of user js film ratings
+
+then use theta and apply to content description of new films, and predict whether they will like them 

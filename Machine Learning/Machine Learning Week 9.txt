@@ -1,0 +1,56 @@
+Machine Learning Week 9 Anomaly Detection 
+Anomaly detection: 
+New example far different from dataset seen before 
+Assume m examples are non anomolous
+alagorithm to tell if x-test is anonymous 
+
+Build model for p(x) 
+if p(xtest) < epsilon == flag anomaly
+where p is the probability of different examples having different feature values 
+
+applications: 
+fraud detection, features - website visits, typing speed, etc. 
+demand additional identification 
+
+manufacturing, aircraft engines, performance bizarre? 
+
+montioring computers in data center:
+compute features of machines, check large computing clusters are all operating normally 
+
+Gaussian Distribution, aka Normal Distribution 
+GD is a ptobability distribuion 
+x ~ (where tilda means distributed as) N(u,sigma^2)
+N = normal
+gaussian distribution paramaterised by u(mean) and varaince (sigma^2) 
+whose values define the probability of x taking on different values 
+sigma = std dev
+sigma^2 = variance 
+
+
+parameter estimation
+assume your values for x are normally distributed for a specific value of u and sigma^2
+how do you estimate what the parameters must be? 
+take u and std dev for your values:
+
+u = 1/m *sum(x) 
+sigma^2 = 1/m*sum(x(i) - u^2) % squared difference between examples and the mean 
+
+Algorithm: 
+
+Density Estimation:
+p(x) = what are high probability features/low probability features 
+
+= p(x1;u1,sigma2^2 )*p(x2; )*p(x3; )*p(xn; ) #assume independent
+assume feature x1 ~ N(u,sigma^2) 
+
+which can be written as PROD(j=1:n)*p(xj;uj-sigmaj^2) %PROD of a set of value = capital greek alphabet PI
+
+Anomaly detection algorithm:
+1.Choose features x that you think are indicative of anomalous examples 
+2.Fit u and sigma parameters for each feature (this can be vectorized)
+3.Given new exampe compute p(x) 
+call anomaly if p(x) < epsilon 
+
+
+
+
