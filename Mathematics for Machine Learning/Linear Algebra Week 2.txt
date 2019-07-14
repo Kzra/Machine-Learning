@@ -1,0 +1,51 @@
+Linear Algebra Week 2 
+
+Length of a vector = Size
+irrespective of the co-ordinate system we use, how to calculate the length of a vector and the direction it is going in
+r = [a;b]
+|r| =  sqrt(a^2+b^2)
+size of a vector is defined as the sums of the squares of its component square rooted. regardless of context. 
+modulus of r
+
+Dot product of a vector:
+
+multiplying two vectors together to give a scalar product 
+1.the dot product is commutative 
+r dot s is equal to s dot r
+
+2.dot product is distributive over addition
+r dot (s + t) is the same (r dot s) + (r dot t) 
+
+3.also associatvie over scalar multplication
+r.(a.s) == a.(r.s) 
+
+4.finally a vectors dot product with itself is equal to the size ^2
+r.r = |size|^2
+r.r == ri^2 + rj^2 
+
+Cosine & dot product: 
+cosine rule:
+c^2 = a^2 + b^2 - 2*a*b cos(theta)
+c^2 = |r-s|^2 = |r| + |s| - 2 |r||s| * cos (theta) 
+|r-s|^2 = (r-s)(r-s)  = |r|^2 - 2s.r + |s|^2
+cancel out 
+s.r = |r||s|cos(theta)
+
+dot product of vectors tells us the extent to which two vectors go in the same direction by multiplying by the angle between them
+if cos(90) = 0 
+r.s = 0
+cos(0) = 1 
+r.s = 1
+cos(180)
+r.s = - |r|*|s|
+
+if two vectors are orthogonal the dot product will be zero 
+if they are pointed in the same direction the dot product = = |r|*|s|
+if they are in opposite directions dot product will be -1 
+
+
+Projection 
+
+
+
+

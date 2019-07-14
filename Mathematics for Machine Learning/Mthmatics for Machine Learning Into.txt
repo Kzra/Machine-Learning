@@ -1,0 +1,48 @@
+Mathematics for Machine Learning Week 1 
+
+Multivariate calculus - how the thing we are trying to optimise changes with changes to the parameters that describe it.
+Pen and paper mathematics is not a useful skill in the world of computers. The ideas behing the mathematics is. 
+
+Linear algebra - the study of vectors, vector spaces and mapping between spaces. Came about by intuition that linear equations could be solved by using vectors. 
+
+What sort of problems can we solve with linear algebra?
+2apples + 3bananas = 8 euros 
+10 applies + 1banana = 13 euros 
+
+solve simultaneous equations to discover individual prices.
+how can we do this with a computer algorithm? 
+this is a linear algebra problem 
+constansts linear coefficients, and some cost to solve.
+(2,3;10,1)*[a;b] = [8;13]
+
+
+another problem: fitting an equation to data. 
+how to find optimum values of parameters to describe the line that fits a histogram (say) of all the popualtion ages
+we can then use the equation to describe the data, without needing all the data beneath it. 
+
+Get a handle on Vectors: 
+vectors can represent a move down parameter space 
+
+operations with vectors:
+vectors can be seen as an object that moves us about space
+physical space, or a space of data. geometric object starting at the origin 
+
+in data science vectors can be seen as things that describe an object.
+
+a vector is an entity that abides two rules: 
+1. addition
+2. multiplication by a scalar number 
+
+vector addition is associative. 
+if we have three vectors: r,s,t
+it doesn't matter whether we do 
+(r + s) + t
+or s + (r + t)
+etc.
+
+vector subtraction is addition of -1 * (X) 
+r - r = 0 
+
+multiplication by a scalar. 2r = 2*components of r 
+
+i [1;0] and j [0;1] are called the fundamental basis vectors, and are the co-ordinates that define the space
